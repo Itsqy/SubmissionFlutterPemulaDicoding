@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:helloflutter/model/restaurant.dart';
+import 'package:helloflutter/data/model/restaurant.dart';
 import 'package:helloflutter/screen/dashboard_screen.dart';
 import 'package:helloflutter/screen/detail_screen.dart';
 import 'package:helloflutter/screen/main_screen.dart';
 
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

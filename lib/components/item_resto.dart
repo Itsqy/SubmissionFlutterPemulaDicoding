@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:helloflutter/data/api/resto_responses.dart';
 import 'package:helloflutter/gen/fonts.gen.dart';
-import 'package:helloflutter/model/restaurant.dart';
 import 'package:helloflutter/screen/detail_screen.dart';
 
 class ItemResto extends StatelessWidget {
@@ -15,6 +15,8 @@ class ItemResto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imgUrl =
+        "https://restaurant-api.dicoding.dev/images/small/${restaurant.pictureId}";
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, DetailScreen.routeName,
           arguments: restaurant),
@@ -32,9 +34,9 @@ class ItemResto extends StatelessWidget {
               children: [
                 Expanded(
                   child: Hero(
-                    tag: restaurant.imageUrl,
+                    tag: restaurant.pictureId,
                     child: Image.network(
-                      restaurant.imageUrl,
+                      imgUrl,
                       width: 78,
                       height: 67,
                       errorBuilder: (context, error, stackTrace) =>

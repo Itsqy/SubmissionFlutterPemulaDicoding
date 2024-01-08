@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helloflutter/gen/fonts.gen.dart';
-import 'package:helloflutter/model/restaurant.dart';
+import 'package:helloflutter/data/model/restaurant.dart';
 import 'package:helloflutter/components/item_menu.dart';
 
 class DetailScreen extends StatelessWidget {

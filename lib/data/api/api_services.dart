@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/data/api/resto_responses.dart';
+import 'package:helloflutter/data/model/resto_detail_responses.dart';
+import 'package:helloflutter/data/model/resto_responses.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
@@ -9,10 +10,19 @@ class ApiService {
 
   Future<RestoResponses> getAllResto() async {
     final response = await http.get(Uri.parse("${_baseUrl}/list"));
-    print(response);
-    debugPrint("loading,${response.body}");
+    debugPrint("all,${response.body}");
     if (response.statusCode == 200) {
       return RestoResponses.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("failed to get data ");
+    }
+  }
+
+  Future<RestoDetailResponses> getDetailresto(String id) async {
+    final response = await http.get(Uri.parse("${_baseUrl}/detail/$id"));
+    debugPrint("detail,${response.body}");
+    if (response.statusCode == 200) {
+      return RestoDetailResponses.fromJson(json.decode(response.body));
     } else {
       throw Exception("failed to get data ");
     }

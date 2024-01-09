@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helloflutter/data/api/api_services.dart';
-import 'package:helloflutter/data/api/resto_responses.dart';
+import 'package:helloflutter/data/model/resto_responses.dart';
 
 enum ResultState { loading, noData, hasData, error }
 

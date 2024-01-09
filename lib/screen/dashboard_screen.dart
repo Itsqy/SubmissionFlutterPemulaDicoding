@@ -1,33 +1,17 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:helloflutter/components/card_good_morning.dart';
 import 'package:helloflutter/components/card_dashboard_info.dart';
 import 'package:helloflutter/components/list_resto.dart';
 import 'package:helloflutter/data/api/api_services.dart';
-import 'package:helloflutter/data/api/resto_responses.dart';
 import 'package:helloflutter/gen/fonts.gen.dart';
 import 'package:helloflutter/provider/resto_provider.dart';
 import 'package:provider/provider.dart';
 
-class DashboardScreen extends StatefulWidget {
+class DashboardScreen extends StatelessWidget {
   final String user;
   static const routeName = "/dashboard";
 
   const DashboardScreen(this.user, {super.key});
-
-  @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
-}
-
-class _DashboardScreenState extends State<DashboardScreen> {
-  late Future<RestoResponses> _resto;
-
-  @override
-  void initState() {
-    super.initState();
-    _resto = ApiService().getAllResto();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Text(
-                        " ${widget.user}".toUpperCase(),
+                        " $user".toUpperCase(),
                         style: const TextStyle(
                             fontSize: 24,
                             color: Colors.white,

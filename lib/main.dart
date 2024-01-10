@@ -4,6 +4,7 @@ import 'package:helloflutter/data/model/resto_responses.dart';
 import 'package:helloflutter/screen/dashboard_screen.dart';
 import 'package:helloflutter/screen/detail_screen.dart';
 import 'package:helloflutter/screen/main_screen.dart';
+import 'package:helloflutter/screen/search_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -23,6 +24,7 @@ class _MyAppState extends State<MyApp> {
         initialRoute: MainScreen.routeName,
         routes: {
           MainScreen.routeName: (context) => const MainScreen(),
+          SearchScreen.routeName: (context) => const SearchScreen(),
           DashboardScreen.routeName: (context) => DashboardScreen(
               ModalRoute.of(context)?.settings.arguments as String),
           DetailScreen.routeName: (context) => DetailScreen(

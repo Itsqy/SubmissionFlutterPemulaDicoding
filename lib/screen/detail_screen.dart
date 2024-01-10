@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helloflutter/components/expandable_text.dart';
 import 'package:helloflutter/components/item_menu.dart';
 import 'package:helloflutter/data/api/api_services.dart';
 import 'package:helloflutter/data/model/resto_responses.dart';
@@ -18,7 +19,7 @@ class DetailScreen extends StatelessWidget {
           apiService: ApiService(), idDetail: restaurant.id),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(restaurant.id),
+          title: Text(restaurant.name),
         ),
         body: SingleChildScrollView(
           child: Consumer<RestoDetailProvider>(
@@ -70,8 +71,10 @@ class DetailScreen extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 15),
-                                  child: Text(
-                                    state.result.restaurant.description,
+                                  child: ExpandableText(
+                                    maxLines: 50,
+                                    minLines: 3,
+                                    text: state.result.restaurant.description,
                                   ),
                                 ),
                                 const Padding(

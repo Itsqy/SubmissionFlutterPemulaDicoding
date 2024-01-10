@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(primarySwatch: Colors.green, fontFamily: 'Poppins'),
-        initialRoute: MainScreen.routeName,
+        initialRoute: SearchScreen.routeName,
         routes: {
           MainScreen.routeName: (context) => const MainScreen(),
           SearchScreen.routeName: (context) => const SearchScreen(),

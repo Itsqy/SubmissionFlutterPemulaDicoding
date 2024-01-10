@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helloflutter/components/expanded_button.dart';
 
 class SearchScreen extends StatelessWidget {
   static const routeName = "/search";
@@ -11,7 +12,14 @@ class SearchScreen extends StatelessWidget {
         title: const Text("Search Resto"),
       ),
       body: const Column(
-        children: [TextField()],
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ExpandingButton(),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -14,11 +14,11 @@ class HumidityCard extends StatelessWidget {
         children: [
           Text(
             "$title",
-            style: const TextStyle(color: Color(0xff59981A), fontSize: 10),
+            style: const TextStyle(color: Colors.black, fontSize: 10),
           ),
           Text(
             "$value",
-            style: const TextStyle(color: Color(0xffD8E84D), fontSize: 10),
+            style: const TextStyle(color: Color(0xff59981A), fontSize: 10),
           ),
         ],
       ),

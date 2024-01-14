@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:helloflutter/components/expandable_text.dart';
 import 'package:helloflutter/components/item_menu.dart';
 import 'package:helloflutter/data/api/api_services.dart';
-import 'package:helloflutter/data/model/resto_responses.dart';
+import 'package:helloflutter/data/model/resto_search.dart';
+
 import 'package:helloflutter/gen/fonts.gen.dart';
 import 'package:helloflutter/provider/resto_detail_provider.dart';
 import 'package:provider/provider.dart';

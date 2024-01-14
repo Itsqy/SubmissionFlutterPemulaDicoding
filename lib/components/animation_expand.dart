@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // Animation to show expanding and collapsed widget transition
 class AnimatedExpandingContainer extends StatelessWidget {
   const AnimatedExpandingContainer({
+    super.key,
     required this.unexpandedWidget,
     required this.expandedWidget,
     required this.isExpanded,

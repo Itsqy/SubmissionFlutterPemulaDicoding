@@ -29,7 +29,8 @@ class ApiService {
   }
 
   Future<RestoSearchResponses> searchResto(String query) async {
-    final response = await http.get(Uri.parse("${_baseUrl}/search?q=<$query>"));
+    debugPrint("query : $query");
+    final response = await http.get(Uri.parse("${_baseUrl}/search?q=$query"));
     debugPrint("search,${response.body}");
     if (response.statusCode == 200) {
       return RestoSearchResponses.fromJson(json.decode(response.body));

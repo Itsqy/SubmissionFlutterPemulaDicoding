@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:helloflutter/data/model/resto_responses.dart';
+import 'package:helloflutter/data/model/resto_search.dart';
+
 import 'package:helloflutter/gen/fonts.gen.dart';
 import 'package:helloflutter/screen/detail_screen.dart';
 

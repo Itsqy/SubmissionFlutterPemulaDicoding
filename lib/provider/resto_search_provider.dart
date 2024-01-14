@@ -14,8 +14,8 @@ class RestoSearchProvider extends ChangeNotifier {
   late String _msg = '';
   String get message => _msg;
 
-  RestoSearchResponses? _restoSearchResponses;
-  RestoSearchResponses? get result => _restoSearchResponses;
+  late RestoSearchResponses _restoSearchResponses;
+  RestoSearchResponses get result => _restoSearchResponses;
 
   Future<dynamic> getSearchData(query) async {
     try {
@@ -27,10 +27,13 @@ class RestoSearchProvider extends ChangeNotifier {
         _state = ResultState.hasData;
         notifyListeners();
         return _restoSearchResponses = restoData;
+      } else if (restoData.founded == 0) {
+        _state = ResultState.noData;
+        notifyListeners();
+        return _msg = 'data tidak ditemukan';
       } else {
         _state = ResultState.loading;
         notifyListeners();
-        return _msg = 'data tidak ditemukan';
       }
     } catch (e) {
       _state = ResultState.error;

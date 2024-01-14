@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Eauteuy',
         theme: ThemeData(primarySwatch: Colors.green, fontFamily: 'Poppins'),
         initialRoute: SearchScreen.routeName,
         routes: {

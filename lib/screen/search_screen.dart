@@ -40,43 +40,45 @@ class SearchScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Consumer<RestoSearchProvider>(
-                    builder: (context, state, _) {
-                      if (state.state == ResultState.loading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (state.state == ResultState.hasData) {
-                        return Container(
-                          height: 500,
-                          width: screenSize.width,
-                          padding: const EdgeInsets.only(left: 8, right: 8),
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: state.result.restaurants.length,
-                            itemBuilder: (context, index) {
-                              var resto = state.result.restaurants[index];
-                              return ItemResto(
-                                screenSize: screenSize,
-                                restaurant: resto,
-                              );
-                            },
-                          ),
-                        );
-                      } else if (state.state == ResultState.noData) {
-                        return Center(
-                          child: Material(
-                            child: Text(state.message),
-                          ),
-                        );
-                      } else {
-                        return const Center(
-                          child: Text(" "),
-                        );
-                      }
-                    },
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Consumer<RestoSearchProvider>(
+                      builder: (context, state, _) {
+                        if (state.state == ResultState.loading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (state.state == ResultState.hasData) {
+                          return Container(
+                            height: 500,
+                            width: screenSize.width,
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: state.result.restaurants.length,
+                              itemBuilder: (context, index) {
+                                var resto = state.result.restaurants[index];
+                                return ItemResto(
+                                  screenSize: screenSize,
+                                  restaurant: resto,
+                                );
+                              },
+                            ),
+                          );
+                        } else if (state.state == ResultState.noData) {
+                          return Center(
+                            child: Material(
+                              child: Text(state.message),
+                            ),
+                          );
+                        } else {
+                          return const Center(
+                            child: Text(" "),
+                          );
+                        }
+                      },
+                    ),
                   ),
                 )
               ],

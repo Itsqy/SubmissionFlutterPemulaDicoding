@@ -36,7 +36,8 @@ class RestoProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
-      return _msg = 'error : $e';
+      return _msg =
+          'kode error : $e koneksi anda tidak stabil , coba untuk gunakan jaringan yang stabil';
     }
   }
 }

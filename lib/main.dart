@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         title: 'Eauteuy',
         theme: ThemeData(primarySwatch: Colors.green, fontFamily: 'Poppins'),
-        initialRoute: SearchScreen.routeName,
+        initialRoute: MainScreen.routeName,
         routes: {
           MainScreen.routeName: (context) => const MainScreen(),
           SearchScreen.routeName: (context) => const SearchScreen(),

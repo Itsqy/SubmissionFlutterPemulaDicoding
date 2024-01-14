@@ -13,9 +13,8 @@ class RestoProvider extends ChangeNotifier {
   late RestoResponses _restosResult;
   late ResultState _state;
 
-  String _message = '';
-
-  String get message => _message;
+  String _msg = '';
+  String get message => _msg;
 
   RestoResponses get result => _restosResult;
   ResultState get state => _state;
@@ -28,7 +27,7 @@ class RestoProvider extends ChangeNotifier {
       if (resto.restaurants.isEmpty) {
         _state = ResultState.noData;
         notifyListeners();
-        return _message = 'Empty Data';
+        return _msg = 'Empty Data';
       } else {
         _state = ResultState.hasData;
         notifyListeners();
@@ -37,7 +36,7 @@ class RestoProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
-      return _message = 'error --> $e';
+      return _msg = 'error : $e';
     }
   }
 }

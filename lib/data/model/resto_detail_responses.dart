@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final restoDetailResponses = restoDetailResponsesFromJson(jsonString);
-
 import 'dart:convert';
 
 RestoDetailResponses restoDetailResponsesFromJson(String str) =>

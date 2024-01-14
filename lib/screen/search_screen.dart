@@ -69,12 +69,16 @@ class SearchScreen extends StatelessWidget {
                         } else if (state.state == ResultState.noData) {
                           return Center(
                             child: Material(
-                              child: Text(state.message),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                    "error : ${state.message},Check your connection please!"),
+                              ),
                             ),
                           );
                         } else {
-                          return const Center(
-                            child: Text(" "),
+                          return Center(
+                            child: Text("error : ${state.message} "),
                           );
                         }
                       },

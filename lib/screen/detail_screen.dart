@@ -127,12 +127,13 @@ class DetailScreen extends StatelessWidget {
               } else if (state.state == ResultState.noData) {
                 return Center(
                   child: Material(
-                    child: Text(state.message),
+                    child: Text("error : ${state.message},no data!"),
                   ),
                 );
               } else {
-                return const Center(
-                  child: Text("else "),
+                return Center(
+                  child: Text(
+                      "error : ${state.message},Check your connection please!"),
                 );
               }
             },

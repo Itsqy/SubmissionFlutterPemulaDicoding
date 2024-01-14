@@ -5,6 +5,7 @@ import 'package:helloflutter/components/list_resto.dart';
 import 'package:helloflutter/data/api/api_services.dart';
 import 'package:helloflutter/gen/fonts.gen.dart';
 import 'package:helloflutter/provider/resto_provider.dart';
+import 'package:helloflutter/screen/search_screen.dart';
 import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -19,6 +20,32 @@ class DashboardScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, SearchScreen.routeName);
+                },
+                icon: Container(
+                  width: 50,
+                  height: 30,
+                  decoration: const BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      bottomLeft: Radius.circular(8),
+                    ), // Adjust radius as desired
+                  ),
+                  child: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                ))
+          ],
+        ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child:

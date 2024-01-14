@@ -35,7 +35,8 @@ class ListResto extends StatelessWidget {
         } else if (state.state == ResultState.noData) {
           return Center(
             child: Material(
-              child: Text(state.message),
+              child: Text(
+                  "error : ${state.message},Check your connection please!"),
             ),
           );
         } else {

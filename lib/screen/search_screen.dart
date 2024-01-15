@@ -72,13 +72,13 @@ class SearchScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                    "error : ${state.message},Check your connection please!"),
+                                    "error : there is no data !"),
                               ),
                             ),
                           );
                         } else {
                           return Center(
-                            child: Text("error : ${state.message} "),
+                            child: Text("error : check your connection ,please "),
                           );
                         }
                       },

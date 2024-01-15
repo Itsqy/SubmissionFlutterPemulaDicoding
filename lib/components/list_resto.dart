@@ -33,17 +33,16 @@ class ListResto extends StatelessWidget {
             ),
           );
         } else if (state.state == ResultState.noData) {
-          return Center(
+          return const Center(
             child: Material(
-              child: Text("error : ${state.message},no data!"),
+              child: Text("error : there is no data!"),
             ),
           );
         } else {
-          return Center(
+          return const Center(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                  "error : ${state.message},Check your connection please! "),
+              padding: EdgeInsets.all(8.0),
+              child: Text("error : Check your connection please! "),
             ),
           );
         }

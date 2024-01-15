@@ -39,7 +39,7 @@ class RestoSearchProvider extends ChangeNotifier {
       _state = ResultState.error;
       notifyListeners();
       return _msg =
-          "kode error : $e koneksi anda tidak stabil , coba untuk gunakan jaringan yang stabil";
+          "kode error : koneksi anda tidak stabil , coba untuk gunakan jaringan yang stabil";
     }
   }
 }

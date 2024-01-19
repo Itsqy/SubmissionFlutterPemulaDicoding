@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:helloflutter/data/pref_helper.dart';
+import 'package:helloflutter/utils/pref_helper.dart';
 import 'package:helloflutter/utils/styles.dart';
 
 class PreferencesProvider extends ChangeNotifier {

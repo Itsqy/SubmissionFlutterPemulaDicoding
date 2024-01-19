@@ -3,13 +3,10 @@ import 'package:helloflutter/components/card_good_morning.dart';
 import 'package:helloflutter/components/card_dashboard_info.dart';
 import 'package:helloflutter/components/card_menu.dart';
 import 'package:helloflutter/components/list_resto.dart';
-import 'package:helloflutter/data/api/api_services.dart';
 import 'package:helloflutter/gen/fonts.gen.dart';
-import 'package:helloflutter/provider/resto_provider.dart';
 import 'package:helloflutter/screen/favorite_screen.dart';
 import 'package:helloflutter/screen/search_screen.dart';
 import 'package:helloflutter/screen/setting_screen.dart';
-import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatelessWidget {
   final String user;

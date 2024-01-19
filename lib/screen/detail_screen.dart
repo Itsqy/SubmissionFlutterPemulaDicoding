@@ -1,144 +1,104 @@
 import 'package:flutter/material.dart';
-import 'package:helloflutter/components/expandable_text.dart';
-import 'package:helloflutter/components/item_menu.dart';
-import 'package:helloflutter/data/api/api_services.dart';
+import 'package:helloflutter/components/content_detail_page.dart';
 import 'package:helloflutter/data/model/resto_search.dart';
-
-import 'package:helloflutter/gen/fonts.gen.dart';
+import 'package:helloflutter/provider/database_provider.dart';
 import 'package:helloflutter/provider/resto_detail_provider.dart';
 import 'package:provider/provider.dart';
 
 class DetailScreen extends StatelessWidget {
   static const routeName = "/detailRestaurant";
   final Restaurant restaurant;
-  const DetailScreen({Key? key, required this.restaurant}) : super(key: key);
+  const DetailScreen({super.key, required this.restaurant});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<RestoDetailProvider>(
-      create: (_) => RestoDetailProvider(
-          apiService: ApiService(), idDetail: restaurant.id),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(restaurant.name),
-        ),
-        body: SingleChildScrollView(
-          child: Consumer<RestoDetailProvider>(
-            builder: (context, state, _) {
-              if (state.state == ResultState.loading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state.state == ResultState.hasData) {
-                return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Hero(
-                          tag: restaurant.pictureId,
-                          child: Image.network(
-                            "https://restaurant-api.dicoding.dev/images/small/${state.result.restaurant.pictureId}",
-                            errorBuilder: (context, error, stackTrace) =>
-                                const Text("Your connection not stable"),
-                          )),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  state.result.restaurant.name,
-                                  style: const TextStyle(
-                                      fontSize: 30,
-                                      fontFamily: FontFamily.poppins,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.map_outlined),
-                                    Text(
-                                      state.result.restaurant.city,
-                                      style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w100),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.star),
-                                    Text(state.result.restaurant.rating
-                                        .toString()),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 15),
-                                  child: ExpandableText(
-                                    maxLines: 50,
-                                    minLines: 3,
-                                    text: state.result.restaurant.description,
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 20),
-                                  child: Text(
-                                    "Foods",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: double.infinity / 2,
-                                  height: 150,
-                                  child: ListView(
-                                    scrollDirection: Axis.horizontal,
-                                    children: state
-                                        .result.restaurant.menus.foods
-                                        .map((e) {
-                                      return itemMenu(
-                                          e.name, "images/logo_mangga.png");
-                                    }).toList(),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 20, bottom: 10),
-                                  child: Text(
-                                    "Drinnks",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: double.infinity / 2,
-                                  height: 150,
-                                  child: ListView(
-                                    scrollDirection: Axis.horizontal,
-                                    children: state
-                                        .result.restaurant.menus.drinks
-                                        .map((e) {
-                                      return itemMenu(
-                                          e.name, "images/logo_mangga.png");
-                                    }).toList(),
-                                  ),
-                                ),
-                              ]))
-                    ]);
-              } else if (state.state == ResultState.noData) {
-                return const Center(
-                  child: Material(
-                    child: Text("error :there is no data!"),
-                  ),
-                );
-              } else {
-                return const Center(
-                  child: Text("error :Check your connection please!"),
-                );
-              }
-            },
-          ),
-        ),
-      ),
-    );
+    final restoDetailProvider =
+        Provider.of<RestoDetailProvider>(context, listen: false);
+    restoDetailProvider.getdetail(restaurant.id);
+//  buat consumer untu databaseprovider di sini , sehingga bisa dipake untuk FAB
+    return Consumer<DatabaseProvider>(builder: (_, provider, __) {
+      return FutureBuilder(
+          future: provider.isFavorite(restaurant.id),
+          builder: (context, snapshot) {
+            final isFavorite = snapshot.data ?? false;
+            return Scaffold(
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.miniEndFloat,
+              floatingActionButton: isFavorite
+                  ? Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          debugPrint("data dihapus");
+                          provider.removeFav(restaurant.id);
+                        },
+                        icon: const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        ),
+                      ))
+                  : Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.red,
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          debugPrint("data add");
+                          provider.addFav(Restaurant(
+                              id: restaurant.id,
+                              name: restaurant.name,
+                              description: restaurant.description,
+                              pictureId: restaurant.pictureId,
+                              city: restaurant.city,
+                              rating: restaurant.rating));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('telah ditambahkan'),
+                              duration: Duration(seconds: 1),
+                            ),
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.favorite_border,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+              appBar: AppBar(
+                title: Text(restaurant.name),
+              ),
+              body: SingleChildScrollView(
+                child: Consumer<RestoDetailProvider>(
+                  builder: (context, state, _) {
+                    if (state.state == ResultState.loading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state.state == ResultState.hasData) {
+                      return ContentDetailPage(
+                        restaurant: restaurant,
+                        provider: restoDetailProvider,
+                      );
+                    } else if (state.state == ResultState.noData) {
+                      return const Center(
+                        child: Material(
+                          child: Text("error :there is no data!"),
+                        ),
+                      );
+                    } else {
+                      return const Center(
+                        child: Text("error :Check your connection please!"),
+                      );
+                    }
+                  },
+                ),
+              ),
+            );
+          });
+    });
   }
 }

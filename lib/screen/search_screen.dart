@@ -12,74 +12,71 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return ChangeNotifierProvider(
-        create: (_) => RestoSearchProvider(apiService: ApiService()),
-        builder: (context, _) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text("Search Resto"),
-            ),
-            body: Column(
-              children: [
-                TextField(
-                  keyboardType: TextInputType.name,
-                  textInputAction: TextInputAction.search,
-                  onSubmitted: (value) {
-                    Provider.of<RestoSearchProvider>(context, listen: false)
-                        .getSearchData(value);
-                  },
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Enter text here',
-                    icon: Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.green,
-                      ),
-                    ),
-                  ),
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Search Resto"),
+      ),
+      body: Column(
+        children: [
+          TextField(
+            keyboardType: TextInputType.name,
+            textInputAction: TextInputAction.search,
+            onSubmitted: (value) {
+              Provider.of<RestoSearchProvider>(context, listen: false)
+                  .getSearchData(value);
+            },
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              hintText: 'Enter text here',
+              icon: Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Icon(
+                  Icons.search,
+                  color: Colors.green,
                 ),
-                Expanded(
-                  child: Consumer<RestoSearchProvider>(
-                    builder: (context, state, _) {
-                      if (state.state == ResultState.loading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (state.state == ResultState.hasData) {
-                        return Container(
-                          height: 500,
-                          width: screenSize.width,
-                          padding: const EdgeInsets.only(left: 8, right: 8),
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: state.result.restaurants.length,
-                            itemBuilder: (context, index) {
-                              var resto = state.result.restaurants[index];
-                              return ItemResto(
-                                screenSize: screenSize,
-                                restaurant: resto,
-                              );
-                            },
-                          ),
-                        );
-                      } else if (state.state == ResultState.noData) {
-                        return Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text("error : there is no data !"),
-                        );
-                      } else {
-                        return Center(
-                          child: Text(" ${state.message}"),
-                        );
-                      }
-                    },
-                  ),
-                )
-              ],
+              ),
             ),
-          );
-        });
+          ),
+          Expanded(
+            child: Consumer<RestoSearchProvider>(
+              builder: (context, state, _) {
+                if (state.state == ResultState.loading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state.state == ResultState.hasData) {
+                  return Container(
+                    height: 500,
+                    width: screenSize.width,
+                    padding: const EdgeInsets.only(left: 8, right: 8),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.result.restaurants.length,
+                      itemBuilder: (context, index) {
+                        var resto = state.result.restaurants[index];
+                        return ItemResto(
+                          screenSize: screenSize,
+                          restaurant: resto,
+                        );
+                      },
+                    ),
+                  );
+                } else if (state.state == ResultState.noData) {
+                  return const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text("error : there is no data !"),
+                  );
+                } else {
+                  return Center(
+                    child: Text(" ${state.message}"),
+                  );
+                }
+              },
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

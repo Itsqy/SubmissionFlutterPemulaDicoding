@@ -17,11 +17,11 @@ class RestoDetailProvider extends ChangeNotifier {
   RestoDetailResponses get result => _restoDetailResult;
   ResultState get state => _state;
 
-  RestoDetailProvider({required this.idDetail, required this.apiService}) {
-    _getdetail(idDetail);
+  RestoDetailProvider({this.idDetail = '', required this.apiService}) {
+    getdetail(idDetail);
   }
 
-  Future<dynamic> _getdetail(String idDetail) async {
+  Future<dynamic> getdetail(String idDetail) async {
     try {
       _state = ResultState.loading;
       notifyListeners();

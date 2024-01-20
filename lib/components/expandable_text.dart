@@ -7,7 +7,10 @@ class ExpandableText extends StatefulWidget {
   final int minLines;
 
   const ExpandableText(
-      {required this.maxLines, required this.minLines, required this.text});
+      {super.key,
+      required this.maxLines,
+      required this.minLines,
+      required this.text});
 
   @override
   _ExpandableTextState createState() => _ExpandableTextState();
@@ -45,7 +48,7 @@ class _ExpandableTextState extends State<ExpandableText> {
               _isExpanded = !_isExpanded;
             });
           },
-          child: Container(
+          child: SizedBox(
             height: 50,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

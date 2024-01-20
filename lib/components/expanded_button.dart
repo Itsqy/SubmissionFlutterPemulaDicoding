@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ExpandingButton extends StatefulWidget {
-  const ExpandingButton({Key? key}) : super(key: key);
+  const ExpandingButton({super.key});
 
   @override
   _ExpandingButtonState createState() => _ExpandingButtonState();
@@ -77,12 +77,10 @@ class _ExpandingButtonState extends State<ExpandingButton>
                       ),
                     ),
                   )
-                : Container(
-                    child: const Center(
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                      ),
+                : const Center(
+                    child: Icon(
+                      Icons.search,
+                      color: Colors.white,
                     ),
                   ),
           ),

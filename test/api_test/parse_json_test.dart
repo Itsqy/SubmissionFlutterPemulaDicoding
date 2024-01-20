@@ -1,16 +1,13 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:helloflutter/data/api/api_services.dart';
 import 'package:helloflutter/data/model/resto_detail_responses.dart';
 import 'package:helloflutter/data/model/resto_responses.dart';
-import 'package:helloflutter/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:http/testing.dart';
 import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 @GenerateMocks([http.Client])
 void main() {

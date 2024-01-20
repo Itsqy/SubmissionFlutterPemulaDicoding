@@ -38,7 +38,8 @@ class DetailScreen extends StatelessWidget {
                           Fluttertoast.showToast(
                               toastLength: Toast.LENGTH_SHORT,
                               timeInSecForIosWeb: 1,
-                              backgroundColor: Color.fromARGB(255, 164, 18, 8),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 164, 18, 8),
                               textColor: Colors.white,
                               fontSize: 16.0,
                               msg: 'Item removed from your Favorite');
@@ -66,7 +67,8 @@ class DetailScreen extends StatelessWidget {
                           Fluttertoast.showToast(
                               toastLength: Toast.LENGTH_SHORT,
                               timeInSecForIosWeb: 1,
-                              backgroundColor: Color.fromARGB(255, 164, 18, 8),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 164, 18, 8),
                               textColor: Colors.white,
                               fontSize: 16.0,
                               msg: 'item added to favorite');

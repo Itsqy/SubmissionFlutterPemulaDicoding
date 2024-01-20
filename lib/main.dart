@@ -6,6 +6,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:helloflutter/data/api/api_services.dart';
 import 'package:helloflutter/data/db/database_helper.dart';
 import 'package:helloflutter/data/model/resto_search.dart';
+import 'package:helloflutter/provider/alarm_provider.dart';
 import 'package:helloflutter/utils/background_service.dart';
 import 'package:helloflutter/utils/notification_helper.dart';
 import 'package:helloflutter/utils/pref_helper.dart';
@@ -14,6 +15,7 @@ import 'package:helloflutter/provider/pref_provider.dart';
 import 'package:helloflutter/provider/resto_detail_provider.dart';
 import 'package:helloflutter/provider/resto_provider.dart';
 import 'package:helloflutter/provider/resto_search_provider.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:helloflutter/screen/dashboard_screen.dart';
 import 'package:helloflutter/screen/detail_screen.dart';
@@ -53,16 +55,22 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => RestoSearchProvider(apiService: ApiService()),
+          create: (_) => RestoSearchProvider(
+              apiService: ApiService(http.Client as http.Client)),
         ),
         ChangeNotifierProvider(
           create: (_) => DatabaseProvider(databaseHelper: DatabaseHelper()),
         ),
         ChangeNotifierProvider(
-          create: (_) => RestoProvider(apiService: ApiService()),
+          create: (_) =>
+              RestoProvider(apiService: ApiService(http.Client as http.Client)),
         ),
         ChangeNotifierProvider(
-          create: (_) => RestoDetailProvider(apiService: ApiService()),
+          create: (_) => AlarmProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => RestoDetailProvider(
+              apiService: ApiService(http.Client as http.Client)),
         ),
         ChangeNotifierProvider(
           create: (_) => PreferencesProvider(
@@ -83,7 +91,8 @@ class _MyAppState extends State<MyApp> {
               SearchScreen.routeName: (context) => const SearchScreen(),
               FavoriteScreen.routeName: (context) => const FavoriteScreen(),
               DashboardScreen.routeName: (context) => DashboardScreen(
-                  ModalRoute.of(context)?.settings.arguments as String),
+                  // ModalRoute.of(context)?.settings.arguments as String
+                  "rifqi"),
               DetailScreen.routeName: (context) => DetailScreen(
                   restaurant:
                       ModalRoute.of(context)?.settings.arguments as Restaurant),

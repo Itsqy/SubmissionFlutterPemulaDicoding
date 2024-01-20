@@ -14,10 +14,11 @@ class AlarmProvider extends ChangeNotifier {
       print('Scheduling News Activated');
       notifyListeners();
       return await AndroidAlarmManager.periodic(
-        const Duration(hours: 24),
+        // const Duration(hours: 24),
+        const Duration(seconds: 5),
         3,
         BackgroundService.callback,
-        startAt: DateTimeHelper.format(),
+        // startAt: DateTimeHelper.format(),
         exact: true,
         wakeup: true,
       );

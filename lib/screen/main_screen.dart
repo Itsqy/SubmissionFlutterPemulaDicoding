@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloflutter/screen/dashboard_screen.dart';
+import 'package:helloflutter/screen/detail_screen.dart';
+import 'package:helloflutter/utils/notification_helper.dart';
 
 class MainScreen extends StatefulWidget {
   static const routeName = "/inputUser";
@@ -12,6 +14,22 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   String _name = "";
+
+  final NotificationHelper _notificationHelper = NotificationHelper();
+
+  @override
+  void initState() {
+    _notificationHelper
+        .configurationSelectNotificationSubject(DetailScreen.routeName);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    selectNotificationSubject.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

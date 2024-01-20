@@ -14,41 +14,45 @@ class SettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<PreferencesProvider>(
       builder: (context, provider, child) {
-        return ListView(
-          children: [
-            Material(
-              child: ListTile(
-                title: const Text('Dark Theme'),
-                trailing: Switch.adaptive(
-                  value: provider.isDarkTheme,
-                  onChanged: (value) {
-                    provider.enableDarkTheme(value);
-                  },
-                ),
-              ),
+        return Scaffold(
+            appBar: AppBar(
+              title: const Text("Settings"),
             ),
-            Material(
-              child: ListTile(
-                title: const Text('Scheduling News'),
-                trailing: Consumer<AlarmProvider>(
-                  builder: (context, scheduled, _) {
-                    return Switch.adaptive(
-                      value: provider.isDailyNewsActive,
-                      onChanged: (value) async {
-                        if (Platform.isIOS) {
-                          customDialog(context);
-                        } else {
-                          scheduled.scheduledNews(value);
-                          provider.enableDailyNews(value);
-                        }
+            body: ListView(
+              children: [
+                Material(
+                  child: ListTile(
+                    title: const Text('Dark Theme'),
+                    trailing: Switch.adaptive(
+                      value: provider.isDarkTheme,
+                      onChanged: (value) {
+                        provider.enableDarkTheme(value);
                       },
-                    );
-                  },
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ],
-        );
+                Material(
+                  child: ListTile(
+                    title: const Text('Scheduling News'),
+                    trailing: Consumer<AlarmProvider>(
+                      builder: (context, scheduled, _) {
+                        return Switch.adaptive(
+                          value: provider.isDailyNewsActive,
+                          onChanged: (value) async {
+                            if (Platform.isIOS) {
+                              customDialog(context);
+                            } else {
+                              scheduled.scheduledNews(value);
+                              provider.enableDailyNews(value);
+                            }
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ));
       },
     );
   }

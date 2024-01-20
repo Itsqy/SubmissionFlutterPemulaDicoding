@@ -3,6 +3,7 @@ import 'dart:isolate';
 import 'package:helloflutter/main.dart';
 import 'package:helloflutter/data/api/api_services.dart';
 import 'package:helloflutter/utils/notification_helper.dart';
+import 'package:http/http.dart' as http;
 
 final ReceivePort port = ReceivePort();
 
@@ -27,7 +28,7 @@ class BackgroundService {
   static Future<void> callback() async {
     print('Alarm fired!');
     final NotificationHelper notificationHelper = NotificationHelper();
-    var result = await ApiService().getAllResto();
+    var result = await ApiService(http.Client as http.Client).getAllResto();
     await notificationHelper.showNotif(flutterLocalNotificationsPlugin, result);
 
     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);

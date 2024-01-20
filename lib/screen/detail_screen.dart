@@ -37,7 +37,6 @@ class DetailScreen extends StatelessWidget {
                           provider.removeFav(restaurant.id);
                           Fluttertoast.showToast(
                               toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
                               timeInSecForIosWeb: 1,
                               backgroundColor: Color.fromARGB(255, 164, 18, 8),
                               textColor: Colors.white,
@@ -66,7 +65,6 @@ class DetailScreen extends StatelessWidget {
                               rating: restaurant.rating));
                           Fluttertoast.showToast(
                               toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
                               timeInSecForIosWeb: 1,
                               backgroundColor: Color.fromARGB(255, 164, 18, 8),
                               textColor: Colors.white,

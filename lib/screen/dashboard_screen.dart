@@ -100,7 +100,7 @@ class DashboardScreen extends StatelessWidget {
                     screenName: FavoriteScreen.routeName,
                   ),
                   CardMenu(
-                    colorMenu: Colors.brown,
+                    colorMenu: Colors.green,
                     iconMenu: Icons.search,
                     screenName: SearchScreen.routeName,
                   ),

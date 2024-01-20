@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloflutter/components/content_detail_page.dart';
 import 'package:helloflutter/data/model/resto_search.dart';
 import 'package:helloflutter/provider/database_provider.dart';
@@ -34,6 +35,14 @@ class DetailScreen extends StatelessWidget {
                         onPressed: () {
                           debugPrint("data dihapus");
                           provider.removeFav(restaurant.id);
+                          Fluttertoast.showToast(
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Color.fromARGB(255, 164, 18, 8),
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                              msg: 'Item removed from your Favorite');
                         },
                         icon: const Icon(
                           Icons.favorite,
@@ -55,12 +64,14 @@ class DetailScreen extends StatelessWidget {
                               pictureId: restaurant.pictureId,
                               city: restaurant.city,
                               rating: restaurant.rating));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('telah ditambahkan'),
-                              duration: Duration(seconds: 1),
-                            ),
-                          );
+                          Fluttertoast.showToast(
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Color.fromARGB(255, 164, 18, 8),
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                              msg: 'item added to favorite');
                         },
                         icon: const Icon(
                           Icons.favorite_border,

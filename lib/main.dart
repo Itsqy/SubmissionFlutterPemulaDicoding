@@ -55,22 +55,21 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => RestoSearchProvider(
-              apiService: ApiService(http.Client as http.Client)),
+          create: (_) =>
+              RestoSearchProvider(apiService: ApiService(http.Client())),
         ),
         ChangeNotifierProvider(
           create: (_) => DatabaseProvider(databaseHelper: DatabaseHelper()),
         ),
         ChangeNotifierProvider(
-          create: (_) =>
-              RestoProvider(apiService: ApiService(http.Client as http.Client)),
+          create: (_) => RestoProvider(apiService: ApiService(http.Client())),
         ),
         ChangeNotifierProvider(
           create: (_) => AlarmProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => RestoDetailProvider(
-              apiService: ApiService(http.Client as http.Client)),
+          create: (_) =>
+              RestoDetailProvider(apiService: ApiService(http.Client())),
         ),
         ChangeNotifierProvider(
           create: (_) => PreferencesProvider(

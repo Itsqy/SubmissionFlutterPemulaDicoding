@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:helloflutter/utils/background_service.dart';
-import 'package:helloflutter/utils/date_time_helper.dart';
 
 class AlarmProvider extends ChangeNotifier {
   bool _isScheduled = false;
@@ -11,7 +10,6 @@ class AlarmProvider extends ChangeNotifier {
   Future<bool> scheduledNews(bool value) async {
     _isScheduled = value;
     if (_isScheduled) {
-      print('Scheduling News Activated');
       notifyListeners();
       return await AndroidAlarmManager.periodic(
         // const Duration(hours: 24),
@@ -23,7 +21,6 @@ class AlarmProvider extends ChangeNotifier {
         wakeup: true,
       );
     } else {
-      print('Scheduling News Canceled');
       notifyListeners();
       return await AndroidAlarmManager.cancel(3);
     }

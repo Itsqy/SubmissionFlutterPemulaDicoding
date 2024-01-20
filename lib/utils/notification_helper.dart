@@ -31,7 +31,7 @@ class NotificationHelper {
       onDidReceiveNotificationResponse: (details) async {
         final payload = details.payload;
         if (payload != null) {
-          print('notification payload: $payload');
+          debugPrint('notification payload: $payload');
         }
         selectNotificationSubject.add(payload!);
       },

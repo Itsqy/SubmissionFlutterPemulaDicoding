@@ -26,7 +26,6 @@ class BackgroundService {
   }
 
   static Future<void> callback() async {
-    print('Alarm fired!');
     final NotificationHelper notificationHelper = NotificationHelper();
     var result = await ApiService(http.Client as http.Client).getAllResto();
     await notificationHelper.showNotif(flutterLocalNotificationsPlugin, result);

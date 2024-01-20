@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:helloflutter/data/api/api_services.dart';
 import 'package:helloflutter/data/model/resto_detail_responses.dart';
 import 'package:helloflutter/data/model/resto_responses.dart';
+import 'package:helloflutter/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:http/testing.dart';
@@ -60,9 +62,8 @@ void main() {
     }
   }
   ''';
-  group('should', () {
+  group('parsed json test', () {
     test('returns a RestaurantResult when the HTTP call succeeds', () async {
-      // Arrange: Set up the mock client with a successful response
       final mockResponse = {
         "error": false,
         "message": "success",
@@ -71,17 +72,13 @@ void main() {
       };
       final client = MockClient(
           (request) async => Response(json.encode(mockResponse), 200));
-
-      // Act: Call the API method using the mock client
       final result = await ApiService(client).getAllResto();
 
-      // Assert: Verify that the result is a RestaurantResult
       expect(result, isA<RestoResponses>());
     });
     test('parses JSON correctly for restaurant detail by ID', () async {
-      // Arrange:
       const restaurantId = 'rqdv5juczeskfw1e867';
-      final mockResponse = detailRestoResponseMock;
+      const mockResponse = detailRestoResponseMock;
       final client = MockClient((request) async {
         if (request.url.path == '${ApiService.baseUrl}/detail/$restaurantId') {
           return Response(mockResponse, 200);
@@ -90,10 +87,8 @@ void main() {
         }
       });
 
-      // Act:
       final result = await ApiService(client).getDetailresto(restaurantId);
 
-      // Assert:
       expect(result, isA<RestoDetailResponses>());
     });
   });

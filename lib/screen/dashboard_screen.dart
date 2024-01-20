@@ -31,6 +31,7 @@ class DashboardScreen extends StatelessWidget {
                       Image.asset(
                         "images/background_app.png",
                         fit: BoxFit.fill,
+                        key: const Key('dashboardimage'),
                         width: screenSize.width,
                         height: 250,
                       ),

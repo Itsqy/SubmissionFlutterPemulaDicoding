@@ -91,8 +91,7 @@ class _MyAppState extends State<MyApp> {
               SearchScreen.routeName: (context) => const SearchScreen(),
               FavoriteScreen.routeName: (context) => const FavoriteScreen(),
               DashboardScreen.routeName: (context) => DashboardScreen(
-                  // ModalRoute.of(context)?.settings.arguments as String
-                  "rifqi"),
+                  ModalRoute.of(context)?.settings.arguments as String),
               DetailScreen.routeName: (context) => DetailScreen(
                   restaurant:
                       ModalRoute.of(context)?.settings.arguments as Restaurant),

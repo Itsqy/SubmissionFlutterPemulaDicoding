@@ -24,6 +24,6 @@ class AnimatedExpandingContainer extends StatelessWidget {
         secondChild: expandedWidget,
         crossFadeState:
             !isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-        duration: Duration(milliseconds: 800));
+        duration: const Duration(milliseconds: 800));
   }
 }

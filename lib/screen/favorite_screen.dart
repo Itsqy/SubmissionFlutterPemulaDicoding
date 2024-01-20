@@ -15,7 +15,7 @@ class FavoriteScreen extends StatelessWidget {
       builder: (context, providerDb, child) {
         return SafeArea(
           child: Scaffold(
-            appBar: AppBar(title: Text("My Favorits")),
+            appBar: AppBar(title: const Text("My Favorits")),
             body: Consumer<DatabaseProvider>(
               builder: (_, value, __) {
                 if (value.state == ResultState.hasData) {

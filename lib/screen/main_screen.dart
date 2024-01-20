@@ -58,6 +58,7 @@ class _MainScreenState extends State<MainScreen> {
             Padding(
               padding: const EdgeInsets.all(16),
               child: TextField(
+                key: const Key('textFieldUser'),
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     label: Text("masukin nama kamu dulu yuk!"),

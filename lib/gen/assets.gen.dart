@@ -12,17 +12,38 @@ import 'package:flutter/widgets.dart';
 class $ImagesGen {
   const $ImagesGen();
 
+  /// File path: images/background_app.png
+  AssetGenImage get backgroundApp =>
+      const AssetGenImage('images/background_app.png');
+
+  /// File path: images/item_padi.png
+  AssetGenImage get itemPadi => const AssetGenImage('images/item_padi.png');
+
+  /// File path: images/logo_eateuy.png
+  AssetGenImage get logoEateuy => const AssetGenImage('images/logo_eateuy.png');
+
   /// File path: images/logo_mangga.png
   AssetGenImage get logoMangga => const AssetGenImage('images/logo_mangga.png');
 
+  /// File path: images/logo_paddy.png
+  AssetGenImage get logoPaddy => const AssetGenImage('images/logo_paddy.png');
+
+  /// File path: images/rain_logo.png
+  AssetGenImage get rainLogo => const AssetGenImage('images/rain_logo.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [logoMangga];
+  List<AssetGenImage> get values =>
+      [backgroundApp, itemPadi, logoEateuy, logoMangga, logoPaddy, rainLogo];
 }
 
 class Assets {
   Assets._();
 
+  static const String localRestaurant = 'assets/local_restaurant.json';
   static const $ImagesGen images = $ImagesGen();
+
+  /// List of all assets
+  static List<String> get values => [localRestaurant];
 }
 
 class AssetGenImage {

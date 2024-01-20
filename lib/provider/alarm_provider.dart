@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:helloflutter/utils/background_service.dart';
+import 'package:helloflutter/utils/date_time_helper.dart';
 
 class AlarmProvider extends ChangeNotifier {
   bool _isScheduled = false;
@@ -12,11 +13,10 @@ class AlarmProvider extends ChangeNotifier {
     if (_isScheduled) {
       notifyListeners();
       return await AndroidAlarmManager.periodic(
-        // const Duration(hours: 24),
-        const Duration(seconds: 5),
+        const Duration(hours: 24),
         3,
         BackgroundService.callback,
-        // startAt: DateTimeHelper.format(),
+        startAt: DateTimeHelper.format(),
         exact: true,
         wakeup: true,
       );

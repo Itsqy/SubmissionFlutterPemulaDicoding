@@ -10,7 +10,7 @@ class DatabaseProvider extends ChangeNotifier {
     _getFavorits();
   }
 
-  late ResultState _state;
+  ResultState _state = ResultState.noData;
   ResultState get state => _state;
 
   String _message = '';

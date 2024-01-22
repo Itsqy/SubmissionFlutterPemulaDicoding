@@ -11,9 +11,11 @@ class AlarmProvider extends ChangeNotifier {
   Future<bool> scheduledNews(bool value) async {
     _isScheduled = value;
     if (_isScheduled) {
+      debugPrint('alarm activated');
       notifyListeners();
       return await AndroidAlarmManager.periodic(
         const Duration(hours: 24),
+        // const Duration(seconds: 4),
         3,
         BackgroundService.callback,
         startAt: DateTimeHelper.format(),
@@ -21,6 +23,7 @@ class AlarmProvider extends ChangeNotifier {
         wakeup: true,
       );
     } else {
+      debugPrint('Scheduling News Canceled');
       notifyListeners();
       return await AndroidAlarmManager.cancel(3);
     }

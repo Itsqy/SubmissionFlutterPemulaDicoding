@@ -6,8 +6,11 @@ import 'package:helloflutter/data/model/resto_detail_responses.dart';
 import 'package:helloflutter/data/model/resto_responses.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+
+import 'parse_json_test.mocks.dart' as mockClient;
 import 'package:http/testing.dart';
 import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 @GenerateMocks([http.Client])
 void main() {
@@ -76,15 +79,12 @@ void main() {
     test('parses JSON correctly for restaurant detail by ID', () async {
       const restaurantId = 'rqdv5juczeskfw1e867';
       const mockResponse = detailRestoResponseMock;
-      final client = MockClient((request) async {
-        if (request.url.path == '${ApiService.baseUrl}/detail/$restaurantId') {
-          return Response(mockResponse, 200);
-        } else {
-          throw Exception('Unexpected request: ${request.url}');
-        }
-      });
+      final mockClient.MockClient clientMock = mockClient.MockClient();
+      when(clientMock
+              .get(Uri.parse('${ApiService.baseUrl}/detail/$restaurantId')))
+          .thenAnswer((_) async => http.Response(mockResponse, 200));
 
-      final result = await ApiService(client).getDetailresto(restaurantId);
+      final result = await ApiService(clientMock).getDetailresto(restaurantId);
 
       expect(result, isA<RestoDetailResponses>());
     });

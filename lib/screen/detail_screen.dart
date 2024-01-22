@@ -16,7 +16,6 @@ class DetailScreen extends StatelessWidget {
     final restoDetailProvider =
         Provider.of<RestoDetailProvider>(context, listen: false);
     restoDetailProvider.getdetail(restaurant.id);
-//  buat consumer untu databaseprovider di sini , sehingga bisa dipake untuk FAB
     return Consumer<DatabaseProvider>(builder: (_, provider, __) {
       return FutureBuilder(
           future: provider.isFavorite(restaurant.id),

@@ -27,7 +27,7 @@ class BackgroundService {
 
   static Future<void> callback() async {
     final NotificationHelper notificationHelper = NotificationHelper();
-    var result = await ApiService(http.Client as http.Client).getAllResto();
+    var result = await ApiService(http.Client()).getAllResto();
     await notificationHelper.showNotif(flutterLocalNotificationsPlugin, result);
 
     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);

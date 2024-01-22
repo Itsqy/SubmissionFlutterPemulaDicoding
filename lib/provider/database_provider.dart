@@ -42,6 +42,7 @@ class DatabaseProvider extends ChangeNotifier {
   }
 
   Future<bool> isFavorite(String url) async {
+    await Future.delayed(const Duration(seconds: 2));
     final favResto = await databaseHelper.getFavByUrl(url);
     return favResto.isNotEmpty;
   }

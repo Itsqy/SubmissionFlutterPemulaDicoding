@@ -13,10 +13,14 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final restoDetailProvider =
-        Provider.of<RestoDetailProvider>(context, listen: false);
-    restoDetailProvider.getdetail(restaurant.id);
-    return Consumer<DatabaseProvider>(builder: (_, provider, __) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final restoDetailProvider =
+          Provider.of<RestoDetailProvider>(context, listen: false);
+      restoDetailProvider.getdetail(restaurant.id);
+    });
+
+    return Consumer2<DatabaseProvider, RestoDetailProvider>(
+        builder: (_, provider, state, __) {
       return FutureBuilder(
           future: provider.isFavorite(restaurant.id),
           builder: (context, snapshot) {
@@ -82,30 +86,16 @@ class DetailScreen extends StatelessWidget {
                 title: Text(restaurant.name),
               ),
               body: SingleChildScrollView(
-                child: Consumer<RestoDetailProvider>(
-                  builder: (context, state, _) {
-                    if (state.state == ResultState.loading) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else if (state.state == ResultState.hasData) {
-                      return ContentDetailPage(
-                        restaurant: restaurant,
-                        provider: restoDetailProvider,
-                      );
-                    } else if (state.state == ResultState.noData) {
-                      return const Center(
-                        child: Material(
-                          child: Text("error :there is no data!"),
-                        ),
-                      );
-                    } else {
-                      return const Center(
-                        child: Text("error :Check your connection please!"),
-                      );
-                    }
-                  },
-                ),
+                child: switch (state.state) {
+                  ResultState.loading =>
+                    const Center(child: CircularProgressIndicator()),
+                  ResultState.hasData =>
+                    ContentDetailPage(restaurant: restaurant, provider: state),
+                  ResultState.noData =>
+                    const Center(child: Text('error : there is no data ')),
+                  ResultState.error =>
+                    const Center(child: Text('error : check your connection ')),
+                },
               ),
             );
           });

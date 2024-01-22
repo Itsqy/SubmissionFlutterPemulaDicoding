@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:helloflutter/data/api/api_services.dart';
 import 'package:helloflutter/data/db/database_helper.dart';
@@ -34,6 +35,13 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   _service.initializeIsolate();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.green, // Replace with your desired color
+      statusBarIconBrightness: Brightness.light, // Adjust as needed
+    ),
+  );
+
   if (Platform.isAndroid) {
     await AndroidAlarmManager.initialize();
   }
